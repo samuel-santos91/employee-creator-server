@@ -1,9 +1,11 @@
 package com.sam.employeecreatorserver.employee;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import java.util.Date;
 import lombok.Getter;
@@ -13,7 +15,7 @@ public class EmployeeCreateDTO {
 
   @Getter
   @Setter
-  @NotEmpty
+  @NotBlank
   @Size(min = 2, message = "user name should have at least 2 characters")
   private String firstName;
 
@@ -23,51 +25,54 @@ public class EmployeeCreateDTO {
 
   @Getter
   @Setter
-  @NotEmpty
+  @NotBlank
   private String lastName;
 
   @Getter
   @Setter
-  @NotEmpty
+  @NotBlank
   @Email
   private String email;
 
   @Getter
   @Setter
-  @Pattern(regexp = "\\+61\\d{9}", message = "Must be an Australian number")
+  @Pattern(regexp = "\\+61\\s*\\d{9}", message = "Must be an Australian number")
   private String phone;
 
   @Getter
   @Setter
-  @NotEmpty
+  @NotBlank
   private String address;
 
   @Getter
   @Setter
-  @NotEmpty
+  @NotBlank
   private String status; //permanent or contract
 
   @Getter
   @Setter
-  @NotEmpty
+  @NotNull
   private Date startDate;
 
   @Getter
   @Setter
+  @NotNull
   //search for a good constraint
-  private Date finishDate; //if null = on going
+  private Date finishDate; //date or string 'on going'
 
   @Getter
   @Setter
-  @NotEmpty
+  @NotBlank
   private String type; //full-time or part-time
 
   @Getter
   @Setter
-  @Positive(message = "Hours per week must be a positive number")
+  @NotNull
+  @Min(value = 0, message = "Hours per week must be at least 0")
+  @Max(value = 50, message = "Hours per week must be at most 50")
   private Number hoursPerWeek;
 
-  public EmployeeCreateDTO() {};
+  public EmployeeCreateDTO() {}
 
   public EmployeeCreateDTO(
     String firstName,
