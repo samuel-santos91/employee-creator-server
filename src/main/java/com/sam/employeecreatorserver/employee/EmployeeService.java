@@ -35,7 +35,7 @@ public class EmployeeService {
     Date startDate = data.getStartDate();
     Date finishDate = data.getFinishDate();
     String type = data.getType();
-    Number hoursPerWeek = data.getHoursPerWeek();
+    Double hoursPerWeek = data.getHoursPerWeek();
     Date createdAt = new Date();
 
     Employee newEmployee = new Employee(

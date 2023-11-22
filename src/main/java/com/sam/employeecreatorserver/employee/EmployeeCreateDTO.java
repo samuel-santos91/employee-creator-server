@@ -70,7 +70,7 @@ public class EmployeeCreateDTO {
   @NotNull
   @Min(value = 0, message = "Hours per week must be at least 0")
   @Max(value = 50, message = "Hours per week must be at most 50")
-  private Number hoursPerWeek;
+  private Double hoursPerWeek;
 
   public EmployeeCreateDTO() {}
 
@@ -85,7 +85,7 @@ public class EmployeeCreateDTO {
     Date startDate,
     Date finishDate,
     String type,
-    Number hoursPerWeek
+    Double hoursPerWeek
   ) {
     this.firstName = firstName;
     this.middleName = middleName;

@@ -62,7 +62,7 @@ public class Employee {
   @Column
   @Getter
   @Setter
-  private Date finishDate; //if null = on going
+  private Date finishDate; //date or string 'on going'
 
   @Column
   @Getter
@@ -72,7 +72,7 @@ public class Employee {
   @Column
   @Getter
   @Setter
-  private Number hoursPerWeek;
+  private Double hoursPerWeek;
 
   @Column
   @Getter
@@ -92,7 +92,7 @@ public class Employee {
     Date startDate,
     Date finishDate,
     String type,
-    Number hoursPerWeek,
+    Double hoursPerWeek,
     Date createdAt
   ) {
     this.firstName = firstName;
