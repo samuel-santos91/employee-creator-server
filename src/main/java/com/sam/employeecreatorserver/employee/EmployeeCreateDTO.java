@@ -36,12 +36,12 @@ public class EmployeeCreateDTO {
 
   @Getter
   @Setter
+  @NotBlank
   @Pattern(regexp = "\\+61\\s*\\d{9}", message = "Must be an Australian number")
   private String phone;
 
   @Getter
   @Setter
-  @NotBlank
   private String address;
 
   @Getter
@@ -67,8 +67,6 @@ public class EmployeeCreateDTO {
 
   @Getter
   @Setter
-  @NotNull
-  @Min(value = 0, message = "Hours per week must be at least 0")
   @Max(value = 50, message = "Hours per week must be at most 50")
   private Double hoursPerWeek;
 
