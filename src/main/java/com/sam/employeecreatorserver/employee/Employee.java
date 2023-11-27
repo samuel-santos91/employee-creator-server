@@ -62,7 +62,12 @@ public class Employee {
   @Column
   @Getter
   @Setter
-  private Date finishDate; //date or string 'on going'
+  private Date finishDate; //if null => 'on going'
+
+  @Column
+  @Getter
+  @Setter
+  private String ongoing; //if null => finishDate
 
   @Column
   @Getter
@@ -91,6 +96,7 @@ public class Employee {
     String status,
     Date startDate,
     Date finishDate,
+    String ongoing,
     String type,
     Double hoursPerWeek,
     Date createdAt
@@ -104,6 +110,7 @@ public class Employee {
     this.status = status;
     this.startDate = startDate;
     this.finishDate = finishDate;
+    this.ongoing = ongoing;
     this.type = type;
     this.hoursPerWeek = hoursPerWeek;
     this.createdAt = createdAt;

@@ -34,6 +34,7 @@ public class EmployeeService {
     String status = data.getStatus();
     Date startDate = data.getStartDate();
     Date finishDate = data.getFinishDate();
+    String ongoing = data.getOngoing();
     String type = data.getType();
     Double hoursPerWeek = data.getHoursPerWeek();
     Date createdAt = new Date();
@@ -48,6 +49,7 @@ public class EmployeeService {
       status,
       startDate,
       finishDate,
+      ongoing,
       type,
       hoursPerWeek,
       createdAt
@@ -82,6 +84,7 @@ public class EmployeeService {
       toUpdate.setStatus(data.getStatus());
       toUpdate.setStartDate(data.getStartDate());
       toUpdate.setFinishDate(data.getFinishDate());
+      toUpdate.setOngoing(data.getOngoing());
       toUpdate.setType(data.getType());
       toUpdate.setHoursPerWeek(data.getHoursPerWeek());
 

@@ -1,5 +1,6 @@
 package com.sam.employeecreatorserver.employee;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
@@ -55,7 +56,11 @@ public class EmployeeCreateDTO {
 
   @Getter
   @Setter
-  private Date finishDate; //date or string 'on going'
+  private Date finishDate; //if null => 'ongoing'
+
+  @Getter
+  @Setter
+  private String ongoing; //if null => finishDate
 
   @Getter
   @Setter
@@ -79,6 +84,7 @@ public class EmployeeCreateDTO {
     String status,
     Date startDate,
     Date finishDate,
+    String ongoing,
     String type,
     Double hoursPerWeek
   ) {
@@ -91,6 +97,7 @@ public class EmployeeCreateDTO {
     this.status = status;
     this.startDate = startDate;
     this.finishDate = finishDate;
+    this.ongoing = ongoing;
     this.type = type;
     this.hoursPerWeek = hoursPerWeek;
   }
