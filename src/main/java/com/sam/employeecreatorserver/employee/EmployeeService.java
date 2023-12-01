@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ public class EmployeeService {
 
   @Autowired
   private EmployeeRepository employeeRepository;
+
+  @Autowired
+	private ModelMapper modelMapper;
 
   public List<Employee> getAll() {
     return this.employeeRepository.findAll();
@@ -24,36 +28,9 @@ public class EmployeeService {
   }
 
   public Employee createEmployee(EmployeeCreateDTO data) {
-    //refactor to model mapper
-    String firstName = data.getFirstName().trim();
-    String middleName = data.getMiddleName().trim();
-    String lastName = data.getLastName().trim();
-    String email = data.getEmail().trim();
-    String phone = data.getPhone().replaceAll("\\s+", "");
-    String address = data.getAddress().trim();
-    String status = data.getStatus();
-    Date startDate = data.getStartDate();
-    Date finishDate = data.getFinishDate();
-    String ongoing = data.getOngoing();
-    String type = data.getType();
-    Double hoursPerWeek = data.getHoursPerWeek();
-    Date createdAt = new Date();
 
-    Employee newEmployee = new Employee(
-      firstName,
-      middleName,
-      lastName,
-      email,
-      phone,
-      address,
-      status,
-      startDate,
-      finishDate,
-      ongoing,
-      type,
-      hoursPerWeek,
-      createdAt
-    );
+    Employee newEmployee = modelMapper.map(data, Employee.class);
+    newEmployee.setCreatedAt(new Date());
     Employee created = this.employeeRepository.save(newEmployee);
     return created;
   }
@@ -74,20 +51,8 @@ public class EmployeeService {
     if (foundEmployee.isPresent()) {
       Employee toUpdate = foundEmployee.get();
 
-      //refactor to model mapper
-      toUpdate.setFirstName(data.getFirstName());
-      toUpdate.setMiddleName(data.getMiddleName());
-      toUpdate.setLastName(data.getLastName());
-      toUpdate.setEmail(data.getEmail());
-      toUpdate.setPhone(data.getPhone());
-      toUpdate.setAddress(data.getAddress());
-      toUpdate.setStatus(data.getStatus());
-      toUpdate.setStartDate(data.getStartDate());
-      toUpdate.setFinishDate(data.getFinishDate());
-      toUpdate.setOngoing(data.getOngoing());
-      toUpdate.setType(data.getType());
-      toUpdate.setHoursPerWeek(data.getHoursPerWeek());
-
+      modelMapper.map(data, toUpdate);
+     
       Employee updatedEmployee = this.employeeRepository.save(toUpdate);
 
       return Optional.of(updatedEmployee);
