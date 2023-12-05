@@ -169,13 +169,41 @@ public class EmployeeServiceTest {
       20.0
     );
 
+    Employee updatedEmployeeFromDB = new Employee(
+      "updatedName",
+      "middle",
+      "last",
+      "email@email.au",
+      "+61999999999",
+      "address 123",
+      "permanent",
+      new Date(2020 - 10 - 10),
+      new Date(2021 - 10 - 10),
+      null,
+      "full-time",
+      20.0,
+      new Date()
+    );
+
     BDDMockito
       .given(employeeRepository.findById(id))
       .willReturn(Optional.of(existingEmployee));
 
     BDDMockito
-      .given(mapper.map(updatedEmployee, Employee.class))
-      .willReturn(existingEmployee);
+      .doAnswer(invocation -> {
+        Employee destination = invocation.getArgument(1);
+
+        destination.setFirstName(updatedEmployee.getFirstName());
+        destination.setType(updatedEmployee.getType());
+
+        return null;
+      })
+      .when(mapper)
+      .map(updatedEmployee, existingEmployee);
+
+    BDDMockito
+      .given(employeeRepository.save(existingEmployee))
+      .willReturn(updatedEmployeeFromDB);
 
     Optional<Employee> updatedOptional =
       this.employeeService.updateById(id, updatedEmployee);
