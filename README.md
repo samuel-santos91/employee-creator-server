@@ -29,6 +29,22 @@
  - Configure cors in WebConfig.java;
  - Run the application.
 
+## Testing
+### Unit Tests
+The service layer is tested through a set of unit tests. These tests cover various scenarios to ensure that each component of the service functions as expected.
+
+### Running Unit Tests
+To run the unit tests, use the following command:
+
+```bash
+./mvnw test
+```
+### Testing Dependencies
+Make sure you have the following tools installed before running tests:
+
+- Java Development Kit (JDK)
+- Maven 
+
 ### Frontend repository
 Refer to https://github.com/samuel-santos91/employee-creator
 
